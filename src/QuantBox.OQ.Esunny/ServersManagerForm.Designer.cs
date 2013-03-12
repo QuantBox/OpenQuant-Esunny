@@ -1,0 +1,143 @@
+﻿namespace QuantBox.OQ.Esunny
+{
+    partial class ServersManagerForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.listBoxBroker = new System.Windows.Forms.ListBox();
+            this.listBoxServer = new System.Windows.Forms.ListBox();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonRemove = new System.Windows.Forms.Button();
+            this.textBoxUrl = new System.Windows.Forms.TextBox();
+            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.brokerItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.serverItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.brokerItemBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.serverItemBindingSource)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // listBoxBroker
+            // 
+            this.listBoxBroker.DataSource = this.brokerItemBindingSource;
+            this.listBoxBroker.DisplayMember = "Label";
+            this.listBoxBroker.FormattingEnabled = true;
+            this.listBoxBroker.Location = new System.Drawing.Point(12, 50);
+            this.listBoxBroker.Name = "listBoxBroker";
+            this.listBoxBroker.Size = new System.Drawing.Size(216, 264);
+            this.listBoxBroker.TabIndex = 0;
+            // 
+            // listBoxServer
+            // 
+            this.listBoxServer.DataSource = this.serverItemBindingSource;
+            this.listBoxServer.DisplayMember = "Label";
+            this.listBoxServer.FormattingEnabled = true;
+            this.listBoxServer.Location = new System.Drawing.Point(289, 50);
+            this.listBoxServer.Name = "listBoxServer";
+            this.listBoxServer.Size = new System.Drawing.Size(216, 264);
+            this.listBoxServer.TabIndex = 0;
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Location = new System.Drawing.Point(234, 50);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(49, 23);
+            this.buttonAdd.TabIndex = 1;
+            this.buttonAdd.Text = "=>";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            // 
+            // buttonRemove
+            // 
+            this.buttonRemove.Location = new System.Drawing.Point(234, 79);
+            this.buttonRemove.Name = "buttonRemove";
+            this.buttonRemove.Size = new System.Drawing.Size(49, 23);
+            this.buttonRemove.TabIndex = 1;
+            this.buttonRemove.Text = "<-";
+            this.buttonRemove.UseVisualStyleBackColor = true;
+            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
+            // 
+            // textBoxUrl
+            // 
+            this.textBoxUrl.Location = new System.Drawing.Point(12, 12);
+            this.textBoxUrl.Name = "textBoxUrl";
+            this.textBoxUrl.Size = new System.Drawing.Size(412, 20);
+            this.textBoxUrl.TabIndex = 2;
+            this.textBoxUrl.Text = "https://raw.github.com/QuantBox/OpenQuant-Esunny/master/Esunny.Brokers.xml";
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Location = new System.Drawing.Point(430, 9);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpdate.TabIndex = 3;
+            this.buttonUpdate.Text = "在线更新";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
+            // brokerItemBindingSource
+            // 
+            this.brokerItemBindingSource.DataSource = typeof(QuantBox.OQ.Esunny.BrokerItem);
+            // 
+            // serverItemBindingSource
+            // 
+            this.serverItemBindingSource.DataSource = typeof(QuantBox.OQ.Esunny.ServerItem);
+            // 
+            // ServersManagerForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(519, 334);
+            this.Controls.Add(this.buttonUpdate);
+            this.Controls.Add(this.textBoxUrl);
+            this.Controls.Add(this.buttonRemove);
+            this.Controls.Add(this.buttonAdd);
+            this.Controls.Add(this.listBoxServer);
+            this.Controls.Add(this.listBoxBroker);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Name = "ServersManagerForm";
+            this.Text = "经纪商 - 服务器地址 列表";
+            this.Load += new System.EventHandler(this.ServersManagerForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.brokerItemBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.serverItemBindingSource)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.ListBox listBoxBroker;
+        private System.Windows.Forms.ListBox listBoxServer;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonRemove;
+        private System.Windows.Forms.TextBox textBoxUrl;
+        private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.BindingSource brokerItemBindingSource;
+        private System.Windows.Forms.BindingSource serverItemBindingSource;
+    }
+}

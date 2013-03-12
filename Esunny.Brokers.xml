@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfBrokerItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BrokerItem>
+    <Label>易盛信息</Label>
+    <Server>
+      <ServerItem>
+        <Address>123.15.58.21</Address>
+        <Port>6062</Port>
+        <Label>模拟行情(网通)</Label>
+      </ServerItem>
+      <ServerItem>
+        <Address>222.88.40.170</Address>
+        <Port>6062</Port>
+        <Label>模拟行情(电信)</Label>
+      </ServerItem>
+    </Server>
+  </BrokerItem>
+</ArrayOfBrokerItem>
