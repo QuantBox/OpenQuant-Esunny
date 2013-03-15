@@ -224,7 +224,6 @@ namespace QuantBox.OQ.Esunny
         }
         #endregion
 
-
         #region 连接状态回调
         private void OnConnect(IntPtr pQuotApi, int err, string errtext, ConnectionStatus result)
         {
@@ -248,15 +247,17 @@ namespace QuantBox.OQ.Esunny
         {
             if (isConnected)
             {
-                _Connect();
+                ehlog.Info("{0}, err:{1}, errtext:{2}, 等待重试连接", result, err, errtext);
             }
-
-            ehlog.Info("{0}, err:{1}, errtext:{2}", result, err, errtext);
+            else
+            {
+                ehlog.Info("{0}, err:{1}, errtext:{2}", result, err, errtext);
+            }            
 
             if (!isConnected)//从来没有连接成功过，可能是密码错误，直接退出
             {
                 //不能在线程中停止线程，这样会导致软件关闭进程不退出
-                _Disconnect();
+                //_Disconnect();
             }
             else
             {
@@ -279,7 +280,5 @@ namespace QuantBox.OQ.Esunny
             }
         }
         #endregion
-
-
     }
 }
