@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="AccountItem.cs" />
     <Compile Include="BrokerItem.cs" />
+    <Compile Include="DataRecord.cs" />
     <Compile Include="EsunnyProvider.HistoricalDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EsunnyProvider.Esunny.cs" />
