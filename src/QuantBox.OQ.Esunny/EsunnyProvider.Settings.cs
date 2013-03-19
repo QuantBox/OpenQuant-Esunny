@@ -17,6 +17,7 @@ namespace QuantBox.OQ.Esunny
         private const string CATEGORY_DEBUG = "Debug";
         private const string CATEGORY_EXECUTION = "Settings - Execution";
         private const string CATEGORY_HISTORICAL = "Settings - Historical Data";
+        private const string CATEGORY_HISTORICAL_SPECIAL = "Settings - Historical Data - Special";
         private const string CATEGORY_INFO = "Information";
         private const string CATEGORY_NETWORK = "Settings - Network";
         private const string CATEGORY_STATUS = "Status";
@@ -51,6 +52,8 @@ namespace QuantBox.OQ.Esunny
         private void InitSettings()
         {
             _bWantQuotConnect = true;
+            EnableDateFilter = true;
+            BothTradeAndQuote = false;
 
             LoadAccounts();
             LoadServers();

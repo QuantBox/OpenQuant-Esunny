@@ -37,6 +37,24 @@ namespace QuantBox.OQ.Esunny
             get { return 3; }
         }
 
+        [Category(CATEGORY_HISTORICAL_SPECIAL)]
+        [Description("将下载的Bar全部生效，或只生效指定日期内Bar")]
+        [DefaultValue(true)]
+        public bool EnableDateFilter
+        {
+            get;
+            set;
+        }
+
+        [Category(CATEGORY_HISTORICAL_SPECIAL)]
+        [Description("下载Tick数据时，同时生效Trade和Quote")]
+        [DefaultValue(false)]
+        public bool BothTradeAndQuote
+        {
+            get;
+            set;
+        }
+
         public event HistoricalDataEventHandler HistoricalDataRequestCancelled;
 
         public event HistoricalDataEventHandler HistoricalDataRequestCompleted;
@@ -304,17 +322,30 @@ namespace QuantBox.OQ.Esunny
 
                     if (updatetime >= request.BeginDate && updatetime < request.EndDate)
                     {
-                        if (request.DataType == HistoricalDataType.Trade)
+                        if (BothTradeAndQuote)
                         {
                             Trade trade = new Trade(updatetime, std.m_NewPrice, (int)volume);
                             NewHistoricalTrade(this,
                                 new HistoricalTradeEventArgs(trade, request.RequestId, request.Instrument, this, -1));
-                        }
-                        else
-                        {
+
                             Quote quote = new Quote(updatetime, std.m_BuyPrice, (int)std.m_BuyVol, std.m_SellPrice, (int)std.m_SellVol);
                             NewHistoricalQuote(this,
                                 new HistoricalQuoteEventArgs(quote, request.RequestId, request.Instrument, this, -1));
+                        }
+                        else
+                        {
+                            if (request.DataType == HistoricalDataType.Trade)
+                            {
+                                Trade trade = new Trade(updatetime, std.m_NewPrice, (int)volume);
+                                NewHistoricalTrade(this,
+                                    new HistoricalTradeEventArgs(trade, request.RequestId, request.Instrument, this, -1));
+                            }
+                            else
+                            {
+                                Quote quote = new Quote(updatetime, std.m_BuyPrice, (int)std.m_BuyVol, std.m_SellPrice, (int)std.m_SellVol);
+                                NewHistoricalQuote(this,
+                                    new HistoricalQuoteEventArgs(quote, request.RequestId, request.Instrument, this, -1));
+                            }
                         }
                     }
 
@@ -410,7 +441,7 @@ namespace QuantBox.OQ.Esunny
                     {
                         DateTime datetime = Convert.ToDateTime(hd.time.Substring(0, 10));
 
-                        if (datetime >= request.BeginDate && datetime < request.EndDate)
+                        if (!EnableDateFilter||(datetime >= request.BeginDate && datetime < request.EndDate))
                         {
                             Daily daily = new Daily(datetime,
                                                             hd.fOpen, hd.fHigh, hd.fLow, hd.fClose, (long)hd.fVolume, (long)hd.fAmount);
@@ -421,7 +452,7 @@ namespace QuantBox.OQ.Esunny
                     else
                     {
                         DateTime datetime = Convert.ToDateTime(hd.time);
-                        if (datetime >= request.BeginDate && datetime < request.EndDate)
+                        if (!EnableDateFilter || (datetime >= request.BeginDate && datetime < request.EndDate))
                         {
                             Bar bar = new Bar(BarType.Time, request.BarSize, datetime.AddSeconds(-request.BarSize), datetime,
                                 hd.fOpen, hd.fHigh, hd.fLow, hd.fClose, (long)hd.fVolume, (long)hd.fAmount);
