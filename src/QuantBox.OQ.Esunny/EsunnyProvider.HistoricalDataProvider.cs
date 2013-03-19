@@ -140,12 +140,18 @@ namespace QuantBox.OQ.Esunny
 
         public void SendHistoricalDataRequest(HistoricalDataRequest request)
         {
+            if (!_bQuotConnected)
+            {
+                EmitHistoricalDataError(request, "未连接到行情服务器，无法获取数据");
+                return;
+            }
+
             Instrument inst = request.Instrument as Instrument;
             string altSymbol = inst.GetSymbol(Name);
             string altExchange = inst.GetSecurityExchange(Name);
 
-            string market;
-            if (!_dictCode2Market.TryGetValue(altSymbol, out market))
+            StockInfoEx stockInfo;
+            if (!_dictInstruments.TryGetValue(altSymbol, out stockInfo))
             {
                 EmitHistoricalDataError(request, "找不到此合约！");
                 return;
@@ -155,11 +161,11 @@ namespace QuantBox.OQ.Esunny
             {
                 case HistoricalDataType.Trade:
                 case HistoricalDataType.Quote:
-                    SendHistoricalDataRequestTick(request, market);
+                    SendHistoricalDataRequestTick(request, stockInfo.market);
                     return;
                 case HistoricalDataType.Bar:
                 case HistoricalDataType.Daily:
-                    SendHistoricalDataRequestBar(request, market);
+                    SendHistoricalDataRequestBar(request, stockInfo.market);
                     return;
                 case HistoricalDataType.MarketDepth:
                 default:

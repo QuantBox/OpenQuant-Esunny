@@ -47,8 +47,7 @@ namespace QuantBox.OQ.Esunny
         private readonly object _lockMsgQueue = new object();
 
         //记录
-        private readonly Dictionary<string, string> _dictCode2Market = new Dictionary<string, string>();
-        private readonly Dictionary<string, string> _dictCode2Name = new Dictionary<string, string>();
+        private readonly Dictionary<string, StockInfoEx> _dictInstruments = new Dictionary<string, StockInfoEx>();
 
         private ServerItem server;
         private AccountItem account;
@@ -56,7 +55,7 @@ namespace QuantBox.OQ.Esunny
         #region 清除数据
         private void Clear()
         {
-            _dictCode2Market.Clear();
+            _dictInstruments.Clear();
         }
 
         #endregion
@@ -276,7 +275,12 @@ namespace QuantBox.OQ.Esunny
             {
                 IntPtr ptr = (IntPtr)(ptrHead + Marshal.SizeOf(typeof(StockInfo)) * i);
                 StockInfo si = (StockInfo)Marshal.PtrToStructure(ptr, typeof(StockInfo));
-                _dictCode2Market[si.szCode] = pMarketInfo.Market;
+                StockInfoEx sie = new StockInfoEx()
+                {
+                    stockinfo = si,
+                    market = pMarketInfo.Market,
+                };
+                _dictInstruments[si.szCode] = sie;
             }
         }
         #endregion
