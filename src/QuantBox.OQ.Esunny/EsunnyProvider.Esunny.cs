@@ -282,6 +282,7 @@ namespace QuantBox.OQ.Esunny
                 };
                 _dictInstruments[si.szCode] = sie;
             }
+            ehlog.Info("接收到 {0} 信息包，{1}条",pMarketInfo.Market,pMarketInfo.stocknum);
         }
         #endregion
     }

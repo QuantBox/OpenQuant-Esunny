@@ -245,6 +245,7 @@ namespace QuantBox.OQ.Esunny
 
             // 发送请求
             int nRet = QuotApi.QT_RequestTrace(m_pQuotApi, dr.market, dr.symbol, dr.date.ToString("yyyyMMdd"));
+            ehlog.Info("-->RequestTrace:{0},{1},{2} Return:{3}", dr.market, dr.symbol,dr.date.ToString("yyyyMMdd"), nRet);
             if (0 == nRet)
             {
             }
@@ -293,6 +294,7 @@ namespace QuantBox.OQ.Esunny
 
         private void OnRspTraceData(IntPtr pQuotApi, IntPtr pBuffer, ref STKTRACEDATA pTraceData)
         {
+            ehlog.Info("<--OnRspTraceData:{0},{1},{2}条", pTraceData.Market, pTraceData.Code, pTraceData.nCount);
             string key = GetKeyFromSTKTRACEDATA(ref pTraceData);
             DataRecord dr;
             if (historicalDataRecords_key.TryGetValue(key, out dr))
@@ -419,6 +421,7 @@ namespace QuantBox.OQ.Esunny
 
             // 先发请求再存下来
             int nRet = QuotApi.QT_RequestHistory(m_pQuotApi, market, altSymbol, pt);
+            ehlog.Info("-->RequestHistory:{0},{1} Return:{2}", market, altSymbol, nRet);
             if (0 == nRet)
             {
                 SaveRequest(request, key, market, altSymbol, DateTime.MaxValue);
@@ -431,6 +434,7 @@ namespace QuantBox.OQ.Esunny
 
         private void OnRspHistoryQuot(IntPtr pQuotApi, IntPtr pBuffer, ref STKHISDATA pHisData)
         {
+            ehlog.Info("<--OnRspHistoryQuot:{0},{1},{2},{3}条", pHisData.Market, pHisData.Code, (PeriodType)pHisData.nPeriod, pHisData.nCount);
             string key = GetKeyFromSTKHISDATA(ref pHisData);
             DataRecord dr;
             if (historicalDataRecords_key.TryGetValue(key, out dr))
