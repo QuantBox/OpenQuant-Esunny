@@ -336,9 +336,16 @@ namespace QuantBox.OQ.Esunny
                             NewHistoricalTrade(this,
                                 new HistoricalTradeEventArgs(trade, request.RequestId, request.Instrument, this, -1));
 
-                            Quote quote = new Quote(updatetime, std.m_BuyPrice, (int)std.m_BuyVol, std.m_SellPrice, (int)std.m_SellVol);
-                            NewHistoricalQuote(this,
-                                new HistoricalQuoteEventArgs(quote, request.RequestId, request.Instrument, this, -1));
+                            if (std.m_BuyPrice == 0 && std.m_BuyVol == 0 
+                                &&std.m_SellPrice == 0 && std.m_SellVol == 0)
+                            {
+                            }
+                            else
+                            {
+                                Quote quote = new Quote(updatetime, std.m_BuyPrice, (int)std.m_BuyVol, std.m_SellPrice, (int)std.m_SellVol);
+                                NewHistoricalQuote(this,
+                                    new HistoricalQuoteEventArgs(quote, request.RequestId, request.Instrument, this, -1));
+                            }
                         }
                         else
                         {
@@ -350,9 +357,16 @@ namespace QuantBox.OQ.Esunny
                             }
                             else
                             {
-                                Quote quote = new Quote(updatetime, std.m_BuyPrice, (int)std.m_BuyVol, std.m_SellPrice, (int)std.m_SellVol);
-                                NewHistoricalQuote(this,
-                                    new HistoricalQuoteEventArgs(quote, request.RequestId, request.Instrument, this, -1));
+                                if (std.m_BuyPrice == 0 && std.m_BuyVol == 0
+                                && std.m_SellPrice == 0 && std.m_SellVol == 0)
+                                {
+                                }
+                                else
+                                {
+                                    Quote quote = new Quote(updatetime, std.m_BuyPrice, (int)std.m_BuyVol, std.m_SellPrice, (int)std.m_SellVol);
+                                    NewHistoricalQuote(this,
+                                        new HistoricalQuoteEventArgs(quote, request.RequestId, request.Instrument, this, -1));
+                                }
                             }
                         }
                     }
